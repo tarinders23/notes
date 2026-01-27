@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarinder Singh - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --accent: #3182ce;
+            --text-dark: #1a202c;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.4;
+            color: var(--text-dark);
+            background: #e2e8f0;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .download-btn:hover {
+            background: #2c5aa0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(49, 130, 206, 0.5);
+        }
+
+        .resume {
+            width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: 24px 28px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 14px;
+        }
+
+        .header-left h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .header-left .title {
+            font-size: 15px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 13px;
+            color: var(--text-medium);
+        }
+
+        .header-right a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .header-right div {
+            margin-bottom: 2px;
+        }
+
+        /* Summary */
+        .summary {
+            background: var(--bg-light);
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .summary p {
+            font-size: 13px;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        .summary strong {
+            color: var(--text-dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 20px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 10px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .exp-company {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .exp-role {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .exp-date {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .exp-tech {
+            font-size: 11px;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 3px;
+        }
+
+        .exp-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .exp-list li {
+            font-size: 12px;
+            color: var(--text-medium);
+            padding-left: 12px;
+            position: relative;
+            margin-bottom: 2px;
+            line-height: 1.4;
+        }
+
+        .exp-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+        .highlight {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Sidebar */
+        .sidebar section {
+            margin-bottom: 14px;
+        }
+
+        /* Skills */
+        .skill-category {
+            margin-bottom: 8px;
+        }
+
+        .skill-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            color: var(--text-medium);
+            padding: 3px 7px;
+            border-radius: 3px;
+            font-size: 11px;
+            border: 1px solid var(--border);
+        }
+
+        /* Education */
+        .edu-item {
+            margin-bottom: 6px;
+        }
+
+        .edu-degree {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .edu-school {
+            font-size: 11px;
+            color: var(--text-medium);
+        }
+
+        /* Publications */
+        .pub-item {
+            font-size: 11px;
+            color: var(--text-medium);
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .pub-item strong {
+            color: var(--text-dark);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .download-btn {
+                display: none;
+            }
+
+            .resume {
+                margin: 0;
+                box-shadow: none;
+                padding: 20px 24px;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="downloadPDF()">📄 Download PDF</button>
+
+    <div class="resume" id="resume">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Tarinder Singh</h1>
+                <div class="title">Software Engineer • 11 Years Experience</div>
+            </div>
+            <div class="header-right">
+                <div>📞 9999939623</div>
+                <div>✉️ <a href="mailto:tarindersingh@live.co.uk">tarindersingh@live.co.uk</a></div>
+                <div>🎓 M.Tech, Delhi Technological University</div>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="summary">
+            <p><strong>Software Engineer</strong> with <strong>~11 years</strong> of experience in <strong>High-Performance Computing</strong>, <strong>AI Agents</strong>, and <strong>Distributed Systems</strong>. Proven track record in designing latency-critical Python, Go & C/C++ applications. Proficient in building <strong>LLM/RAG systems</strong> and adapting complex AI models for production. Expertise in system-level code refinement and AI-driven innovation.</p>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column - Experience -->
+            <div class="left-column">
+                <h2 class="section-title">Professional Experience</h2>
+
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Gemini Solutions</span>
+                            <span class="exp-role"> — Technology Solutions Lead</span>
+                        </div>
+                        <span class="exp-date">Aug 2024 – Present</span>
+                    </div>
+                    <div class="exp-tech">Python, Go, LLM, RAG, MCP, AI-Agents, AWS CDK, Oracle, Postgres, K8s</div>
+                    <ul class="exp-list">
+                        <li><span class="highlight">Built Oncall AI assist agent</span> for real-time debugging using RAG, MCP, LLM with Slack integration — <span class="highlight">cut MTTR by ~40%</span></li>
+                        <li><span class="highlight">Migrated C++ yield calculators</span> to AWS Lambdas — reduced job time from <span class="highlight">150 mins to 6 mins</span></li>
+                        <li>Led AI L&D initiatives: workshops, career framework redesign, AI hackathons</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Tata 1mg Technologies</span>
+                            <span class="exp-role"> — SDE-3</span>
+                        </div>
+                        <span class="exp-date">Jul 2020 – Jul 2024</span>
+                    </div>
+                    <div class="exp-tech">Python, Go, LLM, RAG, AWS, Postgres, Docker, K8s, Distributed Systems</div>
+                    <ul class="exp-list">
+                        <li><span class="highlight">Built AI-powered code review service</span> using RAG/LLM, integrated into CI/CD pipeline</li>
+                        <li><span class="highlight">Re-architected payment & cart microservices</span> from monolith, enabling horizontal scaling</li>
+                        <li><span class="highlight">Reduced support queries from ~1,200/day to ~30/day</span> (97.5% reduction) by fixing payment issues</li>
+                        <li>Built <span class="highlight">real-time data pipelines</span> processing ~1M records daily for Tata Digital integration</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Innovaccer</span>
+                            <span class="exp-role"> — SDE-2</span>
+                        </div>
+                        <span class="exp-date">Aug 2019 – Jun 2020</span>
+                    </div>
+                    <div class="exp-tech">Python, Django, Celery, AWS, Postgres</div>
+                    <ul class="exp-list">
+                        <li><span class="highlight">Refactored patient engagement microservice</span> to scalable multi-tenant architecture</li>
+                        <li>Built microservices for patient authentication and care provider management</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Adream e-Experts</span>
+                            <span class="exp-role"> — Tech Lead, Co-founder</span>
+                        </div>
+                        <span class="exp-date">May 2018 – Jul 2019</span>
+                    </div>
+                    <div class="exp-tech">Python, Java, React, Flutter, DRUID, Kafka, Aerospike, MongoDB</div>
+                    <ul class="exp-list">
+                        <li><span class="highlight">Developed RTB-compliant DSP</span> handling thousands of real-time bidding requests/sec with sub-ms latency</li>
+                        <li>Built event-driven architecture using Kafka for real-time ad bidding workflows</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">D.E. Shaw India</span>
+                            <span class="exp-role"> — Member of Technical Staff</span>
+                        </div>
+                        <span class="exp-date">Jul 2015 – Apr 2018</span>
+                    </div>
+                    <div class="exp-tech">Python, C++, C#, VSTO, Low-level Linux optimization</div>
+                    <ul class="exp-list">
+                        <li><span class="highlight">Achieved 1500x performance improvement</span> (3s → 0.002s) in real-time risk calculations</li>
+                        <li>Developed <span class="highlight">high-performance C++ app</span> consolidating 1000s market ticks/sec to 1/security/sec</li>
+                        <li>Migrated legacy scripts (Bash, Perl, Tcl) to Python/C++ with <span class="highlight">5x-100x latency improvements</span></li>
+                        <li>Built C++ Python extensions for performance-critical numerical computations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column - Skills & More -->
+            <div class="sidebar">
+                <section>
+                    <h2 class="section-title">Technical Skills</h2>
+                    
+                    <div class="skill-category">
+                        <div class="skill-label">Languages</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Java Script</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-label">AI / ML</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">LLM/RAG</span>
+                            <span class="skill-tag">LangChain</span>
+                            <span class="skill-tag">LangSmith</span>
+                            <span class="skill-tag">MCP</span>
+                            <span class="skill-tag">AI Agents</span>
+                            <span class="skill-tag">Embeddings</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-label">Systems / Infra</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Valgrind/GDB</span>
+                            <span class="skill-tag">Profiling</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">APM</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-label">Data</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Oracle</span>
+                            <span class="skill-tag">Kafka</span>
+                            <span class="skill-tag">ETL</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-label">Architecture</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Microservices</span>
+                            <span class="skill-tag">Event-driven</span>
+                            <span class="skill-tag">REST APIs</span>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="section-title">Leadership</h2>
+                    <div class="skill-tags" style="gap: 4px;">
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">OKR</span>
+                        <span class="skill-tag">PRD</span>
+                        <span class="skill-tag">Design Reviews</span>
+                        <span class="skill-tag">On-call</span>
+                        <span class="skill-tag">Stakeholder Mgmt</span>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="section-title">Publications</h2>
+                    <div class="pub-item">
+                        <strong><a href="https://ieeexplore.ieee.org/abstract/document/7443786" target="_blank">Sandwich-Apriori:</a></strong> Combined approach of Apriori and Reverse-Apriori (2015)
+                    </div>
+                    <div class="pub-item">
+                        <strong><a href="https://link.springer.com/chapter/10.1007/978-981-10-6747-1_7" target="_blank">Deadline-Aware Modified GA</a></strong> for Scheduling Jobs with Burst Time (2015)
+                    </div>
+                    <div class="pub-item">
+                        <strong>Major Project:</strong> Unsupervised Word Sense Disambiguation Using Hindi Wordnet <strong>(NLP/AI)</strong>
+                    </div>
+                </section>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('resume');
+            const opt = {
+                margin: 0,
+                filename: 'Tarinder_Singh_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                }
+            };
+            
+            // Show loading state
+            const btn = document.querySelector('.download-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Generating...';
+            btn.disabled = true;
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

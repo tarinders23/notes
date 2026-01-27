@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarinder Singh - Resume</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --light-text: #666;
+            --bg-color: #fff;
+            --section-bg: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e9ecef;
+            color: var(--text-color);
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-download {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download:hover {
+            background-color: #2980b9;
+        }
+
+        .resume-container {
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            background: white;
+            margin: 40px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left h2 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .contact-item {
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Layout */
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .left-column {
+            width: 32%;
+            background-color: #f4f6f7;
+            padding: 25px 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .right-column {
+            width: 68%;
+            padding: 25px 30px;
+        }
+
+        /* Typography */
+        h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+
+        .right-column h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+        }
+
+        p {
+            font-size: 11px;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        /* Skills Section */
+        .skill-category {
+            margin-bottom: 12px;
+        }
+
+        .skill-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 4px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill-tag {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            color: #555;
+        }
+
+        /* Experience Section */
+        .job-entry {
+            margin-bottom: 18px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .job-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .job-date {
+            font-size: 11px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .job-tech {
+            font-size: 10px;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .job-details {
+            list-style-type: none;
+        }
+
+        .job-details li {
+            font-size: 11px;
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            color: #444;
+        }
+
+        .job-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Education & Publications */
+        .edu-entry, .pub-entry {
+            margin-bottom: 15px;
+        }
+
+        .degree {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .university {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .pub-title {
+            font-size: 11px;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+        .summary-text {
+            font-size: 11px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .controls {
+                display: none;
+            }
+            .resume-container {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <button class="btn-download" id="print-btn" style="margin-right: 10px; background-color: #34495e;">
+            <i class="fas fa-print"></i> Print / Preview
+        </button>
+        <button class="btn-download" id="download-btn">
+            <i class="fas fa-file-pdf"></i> Download PDF
+        </button>
+    </div>
+
+    <div class="resume-container" id="resume">
+        <header>
+            <div class="header-left">
+                <h1>Tarinder Singh</h1>
+                <h2>Senior Technology Leader & Solutions Architect</h2>
+            </div>
+            <div class="header-right">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i> <span>9999939623</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i> <a href="mailto:tarindersingh@live.co.uk">tarindersingh@live.co.uk</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i> <span>Delhi, India</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Sidebar -->
+            <div class="left-column">
+                
+                <h3>Education</h3>
+                <div class="edu-entry">
+                    <div class="degree">M.TECH</div>
+                    <div class="university">Delhi Technological University</div>
+                </div>
+
+                <h3>Core Team Skills</h3>
+                <div class="skill-category">
+                    <div class="skill-title">Languages</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Java</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-title">AI / ML</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLM/RAG</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Agents</span>
+                        <span class="skill-tag">MCP</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-title">System Architecture</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag">Event-driven</span>
+                        <span class="skill-tag">Distributed Systems</span>
+                        <span class="skill-tag">HPC</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-title">Cloud & DevOps</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-title">Data Store</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Postgres</span>
+                        <span class="skill-tag">Oracle</span>
+                        <span class="skill-tag">Kafka</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <h3>Publications</h3>
+                <div class="pub-entry">
+                    <div class="pub-title">Sandwich-Apriori</div>
+                    <p>A combined approach of Apriori and Reverse-Apriori (2015)</p>
+                </div>
+                <div class="pub-entry">
+                    <div class="pub-title">Deadline-Aware Gen. Algo</div>
+                    <p>Scheduling Jobs with Burst Time and Priorities (2015)</p>
+                </div>
+                <div class="pub-entry">
+                    <div class="pub-title">WSD using Hindi Wordnet</div>
+                    <p>Unsupervised Word Sense Disambiguation (2013)</p>
+                </div>
+
+            </div>
+
+            <!-- Main Content -->
+            <div class="right-column">
+                <h3>Profile Summary</h3>
+                <p class="summary-text">
+                    Senior Technology Leader & Solutions Architect with 11+ years of experience designing high-performance distributed systems, AI agents, and scalable microservices. Expert in optimizing latency-critical applications using Python, C++, and Java. Proven track record of leading engineering teams and reducing incident resolution times by ~40% via AI automation.
+                </p>
+
+                <h3>Work Experience</h3>
+
+                <!-- Gemini Solutions -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <div><span class="job-title">Technology Solutions Lead</span> at <span class="company-name">Gemini Solutions</span></div>
+                        <span class="job-date">Aug 2024 - Present</span>
+                    </div>
+                    <div class="job-tech">Python, Go, LLM, RAG, MCP, AI-Agents, AWS CDK, Postgres, K8s</div>
+                    <ul class="job-details">
+                        <li>Built Oncall AI assist agent for real-time debugging on PagerDuty alerts using RAG, MCP, and LLM; cut MTTR by ~40%.</li>
+                        <li>Designed data workflow for Defaulted Securities Workflow & Stock proxy for fixed assets management.</li>
+                        <li>Migrated C++ yield calculators to AWS Lambdas, reducing job time from ~150 mins to ~6 mins.</li>
+                        <li>Led AI initiatives: Instructor for AI workshops, refined engineering career framework, and conducted AI Hackathons.</li>
+                    </ul>
+                </div>
+
+                <!-- Tata 1mg -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <div><span class="job-title">SDE-3</span> at <span class="company-name">Tata 1mg Technologies</span></div>
+                        <span class="job-date">July 2020 - July 2024</span>
+                    </div>
+                    <div class="job-tech">Python, Go, AWS, Postgres, Docker, K8s, Microservices</div>
+                    <ul class="job-details">
+                        <li>Re-architected payment/cart microservices enabling horizontal scaling; reduced support queries from ~1,200/day to ~30/day (97.5% reduction).</li>
+                        <li>Built real-time data migration pipelines processing ~1M records daily for Tata Digital integration.</li>
+                        <li>Developed microservices for corporate merchants, background tasks, and loyalty programs.</li>
+                        <li>Led integration efforts for identity services and Tata Neu Coins ecosystem.</li>
+                    </ul>
+                </div>
+
+                <!-- Innovaccer -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <div><span class="job-title">SDE-2</span> at <span class="company-name">Innovaccer Pvt. Ltd</span></div>
+                        <span class="job-date">Aug 2019 - June 2020</span>
+                    </div>
+                    <div class="job-tech">Python, Django, Celery, AWS, Postgres</div>
+                    <ul class="job-details">
+                        <li>Refactored patient engagement microservice to scalable multi-tenant architecture.</li>
+                        <li>Built new microservices for patient authentication and care provider management.</li>
+                    </ul>
+                </div>
+
+                <!-- Adream -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <div><span class="job-title">Tech Lead, Co-founder</span> at <span class="company-name">Adream e-Experts</span></div>
+                        <span class="job-date">May 2018 - July 2019</span>
+                    </div>
+                    <div class="job-tech">Python, Java, React, Kafka, Aerospike, PostgreSQL</div>
+                    <ul class="job-details">
+                        <li>Developed RTB-compliant DSP handling thousands of requests/sec with sub-millisecond latency.</li>
+                        <li>Designed event-driven architecture using Kafka for real-time ad bidding workflows.</li>
+                        <li>Built React-based frontend for market research and Flutter mobile app for Ed-Tech.</li>
+                    </ul>
+                </div>
+
+                <!-- DE Shaw -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <div><span class="job-title">MTS</span> at <span class="company-name">D.E Shaw India</span></div>
+                        <span class="job-date">July 2015 - April 2018</span>
+                    </div>
+                    <div class="job-tech">Python, C++, C#, Linux, Bash</div>
+                    <ul class="job-details">
+                        <li>Achieved 1500x performance improvement (3s to 0.002s) by optimizing analytical engine.</li>
+                        <li>Built high-performance C++ app to consolidate market ticks (1000s/sec to 1/sec).</li>
+                        <li>Migrated legacy scripts (Bash, Perl) to Python/C++ with 5x-100x latency improvements.</li>
+                        <li>Built C++ Python extensions & VSTO Excel plugins for analytics data access.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const element = document.getElementById('resume');
+            const button = this;
+            
+            // Clone the element to safely modify styles for PDF generation
+            const clone = element.cloneNode(true);
+            
+            // Reset styles that might cause issues in PDF (remove margins and shadows)
+            clone.style.margin = '0';
+            clone.style.boxShadow = 'none';
+            clone.style.width = '210mm'; 
+            clone.style.height = 'auto'; 
+            
+            // Create a temporary container off-screen
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.left = '-9999px';
+            container.style.top = '0';
+            container.appendChild(clone);
+            document.body.appendChild(container);
+
+            const opt = {
+                margin: 0,
+                filename: 'Tarinder_Singh_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Temporary UI feedback
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            
+            html2pdf().from(clone).set(opt).save().then(() => {
+                button.innerHTML = originalText;
+                document.body.removeChild(container);
+            });
+        });
+    </script>
+</body>
+</html>
